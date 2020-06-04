@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+<ui:define name="conteudo">
+	
+	<h:form id="formListagem">
+		<p:panel header="Lista de Vendas">
+			<p:dataTable id="tabela" 
+				emptyMessage="Nenhum registro encontrado."
+				paginator="true" 
+				value="#{vendaListarBean.vendas}" 
+				var="venda" 
+				rows="15">
+				
+				<p:column headerText="Codigo" >
+					<h:outputText value="#{venda.codigo}" />
+				</p:column>
+
+				<p:column headerText="Cliente" filterBy="#{venda.cliente.pessoa.nome}" sortBy="#{venda.cliente.pessoa.nome}" >
+						<h:outputText value="#{venda.cliente.pessoa.nome}" />
+				</p:column>
+				<p:column headerText="Funcionário">
+					<h:outputText value="#{venda.funcionario.pessoa.nome}" />
+				</p:column>
+				
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{vendaListarBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						<p:confirm header="Confirmação" message="Deseja excluir a cidade"
+							icon="ui-icon-alert" />
+						<f:attribute name="vendaSelecionada" value="#{cidade}" />
+					</p:commandButton>
+					
+					
+				</p:column>
+			</p:dataTable>
+			
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+			
+		</p:panel>
+	</h:form>
+
+
+</ui:define>
+</ui:composition>

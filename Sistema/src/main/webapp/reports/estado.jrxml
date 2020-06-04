@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2020-04-01T17:27:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be23676f-f7c6-4f7a-8c55-71a63ed5748a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value="ZmluYW5jZWlyby5lc3RhZG8gQVMgLDE0MywxMDYsYzUzNGMyYTUtNGMwNS00MWFlLWEwMjEtZTYw&#xA;YjI3ODc4NTBmOw=="/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Financeiro Data Adapter "/>
+	<queryString>
+		<![CDATA[SELECT financeiro.estado.nome,
+	financeiro.estado.sigla
+FROM financeiro.estado]]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="sigla" class="java.lang.String"/>
+	<pageHeader>
+		<band height="41" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="-30" width="550" height="30" uuid="0beef8c9-2be1-4132-984d-7416f9f6be82"/>
+				<box>
+					<topPen lineWidth="2.0" lineColor="#B5B0B0"/>
+					<leftPen lineColor="#B5B0B0"/>
+					<bottomPen lineWidth="2.0" lineColor="#B5B0B0"/>
+					<rightPen lineColor="#B5B0B0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="20"/>
+				</textElement>
+				<text><![CDATA[Relatorio de Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="bc587637-600b-449a-a257-3635a23b9bee"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="2" width="100" height="30" uuid="e1d5c790-e935-4226-aa16-c573c71401a8"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Siglas]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="100" height="23" uuid="5701d503-0640-4984-bf05-65e4903963dd"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="10" width="100" height="22" uuid="c60e628c-0aa3-4c39-b230-709409ee692b"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="550" height="42" uuid="dff3ef59-8147-447b-ba10-03e7188fc6c2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Nome da Empresa]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

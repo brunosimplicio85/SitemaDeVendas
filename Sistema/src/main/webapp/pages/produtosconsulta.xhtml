@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:p="http://primefaces.org/ui"
+template="/templates/template.xhtml"
+>
+
+
+<ui:define name="conteudo">
+
+<h:form id="formulario">
+		<p:panel header="Consulta de Produtos" toggleable="true">
+			<h:panelGrid columns="3" >
+				<p:outputLabel for="codigo" value="Código:" />
+				<p:inputText id="codigo" size="20" maxlength="13"
+					required="true" requiredMessage="O campo Código é obrigatório"
+					value="#{produtoPesquisaBean.produto.codigo}" />
+				<p:commandButton icon="ui-icon-search" 
+				actionListener="#{produtoPesquisaBean.buscar}" 
+				update=":mensagem :formulario:painelDados" 
+				process="@this :formulario:codigo" />
+			</h:panelGrid>
+			
+			<h:panelGroup layout="block" id="painelDados"  >
+			<h:panelGrid columns="2" rendered="#{produtoPesquisaBean.exibir}">
+				<p:outputLabel value="Descrição:" />
+				<h:outputText value="#{produtoPesquisaBean.produto.descricao}" />
+				
+				<p:outputLabel value="Preço:" />
+				<h:outputText value="#{produtoPesquisaBean.produto.preco}" >
+				<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</h:outputText>
+				
+				<p:outputLabel value="Quantidade:" />
+				<h:outputText value="#{produtoPesquisaBean.produto.quantidade}" />
+				
+				<p:outputLabel value="Fornecedor:" />
+				<h:outputText value="#{produtoPesquisaBean.produto.fornecedor.nome}" />
+				
+				<p:outputLabel value="Observações:" />
+				<h:inputTextarea rows="2" cols="20" value="#{produtoPesquisaBean.historico.observacoes}"
+				update=":formulario:painelDados" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="1" rendered="#{produtoPesquisaBean.exibir}">
+			<p:commandButton value="Salvar" actionListener="#{produtoPesquisaBean.salvar}" 
+			update="mensagem"
+			/>
+			</h:panelGrid>
+			
+			</h:panelGroup>
+		</p:panel>
+	</h:form>
+	
+	<h:form id="formListagem" enctype="multipart/form-data">
+		<p:panel header="Lista de Produto " toggleable="true" >
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				value="#{produtoBean.produtos}" 
+				var="produto"
+				filteredValue="#{produtoBean.protudosFiltrados}" 
+				rowIndexVar="ronIx"
+				rows="5" rowsPerPageTemplate="5,10,15,20"
+				paginator="true" 
+				paginatorPosition="bottom"
+				style="text-align:center">
+ 				<p:column headerText="ID" >
+					<h:outputText value="#{produto.codigo}"  />
+				</p:column>
+				
+				<p:column headerText="Produto" sortBy="#{produto.descricao}"  filterMatchMode="contains" filterBy="#{produto.descricao}">
+					<h:outputText value="#{produto.descricao}"  />
+				</p:column>
+
+				<p:column headerText="Fornecedor" filterBy="#{produto.fornecedor.nome}" 
+				filterMatchMode="contains" sortBy="#{produto.fornecedor.nome}">
+					<h:outputText value="#{produto.fornecedor.nome}"  />
+				</p:column>
+				
+				<p:column headerText="Observações" >
+					<h:outputText value="#{produtoPesquisaBean.historico.observacoes}"  />
+				</p:column>
+
+				
+			</p:dataTable>
+			</p:panel>
+
+	</h:form>
+
+
+</ui:define>
+</ui:composition>

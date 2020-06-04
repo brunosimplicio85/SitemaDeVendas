@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/template.xhtml">
+
+
+	<ui:define name="conteudo">
+
+		<h:form id="formulario">
+			<p:panel header="Consulta de Vendas" toggleable="true">
+				<h:panelGrid columns="3">
+					<p:outputLabel for="codigo" value="Código:" />
+					<p:inputText id="codigo" size="20" maxlength="13" required="true"
+						requiredMessage="O campo Código é obrigatório"
+						value="#{vendaPesquisaBean.venda.codigo}" />
+					<p:commandButton icon="ui-icon-search"
+						actionListener="#{vendaPesquisaBean.buscar}"
+						update=":mensagem :formulario:painelDados"
+						process="@this :formulario:codigo" />
+				</h:panelGrid>
+
+				<h:panelGroup layout="block" id="painelDados">
+					<h:panelGrid columns="2" rendered="#{vendaPesquisaBean.exibir}">
+						<p:outputLabel value="Horário:" />
+						<h:outputText value="#{vendaPesquisaBean.venda.horario}" >
+						<f:convertDateTime  pattern=" HH:mm:ss dd-MM-yyyy " />
+						</h:outputText>
+
+						<p:outputLabel value="Cliente:" />
+						<h:outputText value="#{vendaPesquisaBean.venda.cliente.pessoa.nome}" />
+						
+
+						<p:outputLabel value="Preço Total:" />
+						<h:outputText value="R$ #{vendaPesquisaBean.venda.precoTotal}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+
+
+					</h:panelGrid>
+
+
+				</h:panelGroup>
+			</p:panel>
+		</h:form>
+
+		<h:form id="formListagem">
+			<p:panel header="Lista de Vendas" toggleable="true">
+				<p:dataTable id="tabelavenda"
+					emptyMessage="Nenhum registro encontrado." paginator="true"
+					value="#{vendaListarBean.vendas}" var="venda" 
+					filteredValue="#{vendaListarBean.vendasFiltrados}" 
+					rowIndexVar="ronIx"
+					rows="5" rowsPerPageTemplate="5,10,15,20"
+					style="text-align:center">
+
+					<p:column headerText="Codigo">
+						<h:outputText value="#{venda.codigo}" />
+					</p:column>
+
+					<p:column headerText="Cliente"
+						filterBy="#{venda.cliente.pessoa.nome}"
+						sortBy="#{venda.cliente.pessoa.nome}">
+						<h:outputText value="#{venda.cliente.pessoa.nome}" />
+					</p:column>
+					<p:column headerText="Funcionário">
+						<h:outputText value="#{venda.funcionario.pessoa.nome}" />
+					</p:column>
+					
+					<p:column  headerText="Data">
+						<h:outputText   value="#{venda.horario}">
+						<f:convertDateTime  pattern="dd-MM-yyyy " />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+		</p:panel>
+		</h:form>
+
+		<h:form id="formitens">
+			<p:panel header="Lista de Itens" toggleable="true">
+			<p:dataTable id="tabelaiten"
+				emptyMessage="Nenhum registro encontrado." 
+				paginator="true"
+				draggableColumns="true" 
+				draggableRows="true"
+				value="#{itemVendaBean.ivendas}" var="ivenda" 
+				filteredValue="#{itemVendaBean.ivendasFiltrados}" 
+				rowIndexVar="ronIx"
+				rows="5" rowsPerPageTemplate="5,10,15,20"
+				style="text-align:center">
+
+				<p:column headerText="Cliente"
+					sortBy="#{ivenda.venda.cliente.pessoa.nome}"
+					filterBy="#{ivenda.venda.cliente.pessoa.nome}">
+					<h:outputText value="#{ivenda.venda.cliente.pessoa.nome}" />
+				</p:column>
+
+				<p:column headerText="Produto">
+					<h:outputText value="#{ivenda.produto.descricao}" />
+				</p:column>
+
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{ivenda.quantidade}" />
+				</p:column>
+				<p:column headerText="Preço">
+					<h:outputText value="R$ #{ivenda.precoParcial}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+					</h:outputText>
+				</p:column>
+				
+			</p:dataTable>
+
+			</p:panel>
+
+		</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

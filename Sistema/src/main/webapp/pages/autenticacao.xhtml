@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="estilo2.css" />
+	<h:outputScript library="js" name="scripts.js" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sistema</title>
+
+</h:head>
+
+<h:body>
+<p:growl id="mensagem"/>
+
+ <div id="principal">
+ <h:form>
+<p:layout style="min-width:200px;min-height:200px;"  id="layout">  
+    <p:layoutUnit position="center" resizable="true" size="200" minSize="250" >  
+        <div id="msg1">
+            Seja Bem vindo
+        </div><br/>
+        
+        <h:panelGrid columns="2">
+        <h:outputLabel value="CPF:" for="cpf" />
+        <p:inputMask id="cpf" mask="999.999.999-99" size="20"   
+        required="true" requiredMessage="O campo CPF é obrigatório" 
+        value="#{autenticacaoBean.usuario.pessoa.cpf}"/>
+        <h:outputLabel value="Senha:" for="senha" />
+        <p:password id="senha" label="Senha" value="#{autenticacaoBean.usuario.senha}" 
+        required="true" requiredMessage="O campo Senha é obrigatório"  />
+        </h:panelGrid><br/> 
+        <h:panelGrid  columns="1">
+				<p:commandButton position="center" value="Entrar" update=":mensagem"
+				actionListener="#{autenticacaoBean.autenticar}"  
+				 />
+			</h:panelGrid><br/>
+    </p:layoutUnit>
+
+     
+</p:layout>
+</h:form>
+</div>
+
+</h:body>
+
+</html>
