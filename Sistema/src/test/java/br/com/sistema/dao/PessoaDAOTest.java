@@ -27,7 +27,7 @@ public class PessoaDAOTest {
 		pessoa.setBairro("Ponta Aguda");
 		pessoa.setCep("89.051-000");
 		pessoa.setComplemento("Casa");
-		pessoa.setTelefone("(47)3333-3333);
+		pessoa.setTelefone("(47)3333-3333");
 		pessoa.setCelular("(47)99999-9999");
 		pessoa.setEmail("bruno@email.com");
 		
