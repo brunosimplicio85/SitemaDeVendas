@@ -19,7 +19,7 @@ public class PessoaDAOTest {
 		Pessoa pessoa = new Pessoa();
 		
 		pessoa.setNome("Bruno Silveira Simplicio");
-		pessoa.setCpf("010.288.361-04");
+		pessoa.setCpf("111.111.11-11");
 		pessoa.setRg("001139204");
 		pessoa.setRua("Das Nissoes");
 		pessoa.setNumero(new Short("1307"));
