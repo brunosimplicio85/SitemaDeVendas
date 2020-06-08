@@ -20,16 +20,16 @@ public class PessoaDAOTest {
 		
 		pessoa.setNome("Bruno Silveira Simplicio");
 		pessoa.setCpf("111.111.11-11");
-		pessoa.setRg("001139204");
+		pessoa.setRg("11111111");
 		pessoa.setRua("Das Nissoes");
 		pessoa.setNumero(new Short("1307"));
 		pessoa.setCidade(cidade);
 		pessoa.setBairro("Ponta Aguda");
 		pessoa.setCep("89.051-000");
 		pessoa.setComplemento("Casa");
-		pessoa.setTelefone("(47)3234-4770");
-		pessoa.setCelular("(47)99719-3315");
-		pessoa.setEmail("bruno.simplicio@outlook.com.com");
+		pessoa.setTelefone("(47)3333-3333);
+		pessoa.setCelular("(47)99999-9999");
+		pessoa.setEmail("bruno@email.com");
 		
 		
 		
